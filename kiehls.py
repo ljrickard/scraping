@@ -100,39 +100,20 @@ def extract_ingredient(ingredient_raw):
 	ingredient_description = extract_text(str(ingredient_raw), str(ingredient_raw).index('</')+1)
 	return {ingredient:ingredient_description}
 
-ingredients = []
-
-for ingredient_raw in ingredients_raw:
-	ingredients.append(extract_ingredient(ingredient_raw))
-
-product['ingredients'] = ingredients
-
+product['ingredients'] = [extract_ingredient(ingredient_raw) for ingredient_raw in ingredients_raw]
 
 def has_item_prop(tag):
     return tag.has_attr('itemprop')
-
-#product_details = soup.find_all('div', class_='l-product_details-wrapper')[-1].extract()
-#price = product_details.find_all('p', {'itemprop':"price"})[-1].extract().get('content')
-
-#print(price)
-
-#product_details = soup.find_all('div', class_='l-product_details-wrapper')[-1].extract()
-#currency = product_details.find_all('span', {'itemprop':"priceCurrency"})[-1].extract().get('content')
-
-#b-product_variation-size
 
 def has_data_pricevalue_and_data_pricemoney(tag):
     return tag.has_attr('data-pricevalue') and tag.has_attr('data-pricemoney')
 
 product_size = product_details.find_all(has_data_pricevalue_and_data_pricemoney)
+product['size'] = [item.get_text().strip().strip('\n') for item in product_size]
 
-for item in product_size:
-	print(item.get_text().strip().strip('\n'))
+images = product_details.find_all('img', class_='primary_image product_image')
 
-
-
-#image = product_details.find_all(has_data_pricevalue_and_data_pricemoney)
-
+product['images'] = [image.get('data-hires-img') for image in images]
 
 with open('testfile.json', 'a') as file:
 	json.dump(product, file)
@@ -140,6 +121,10 @@ with open('testfile.json', 'a') as file:
 
 
 
-
+# TODO: 
+	#save image to S3 bucket
+	#parse size data into 2 parts
+	#collect price and currency data
+	#check for additional images
 
 
