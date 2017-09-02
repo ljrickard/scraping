@@ -169,5 +169,6 @@ logger.info('Total products scraped: %s', len(urls))
 #check for additional images
 #check urls to create male/female category
 #exclude collections
+#need to get primary image
 
 

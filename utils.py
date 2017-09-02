@@ -5,6 +5,7 @@ import uuid
 
 LOCAL_CACHE = 'cache/'
 BUCKET_NAME = '5b05dbe9-c0b8-493e-8b05-7b5422887779'
+AWS_BASE_URL = 'https://s3.amazonaws.com'
 
 #https://stackoverflow.com/questions/16694907/how-to-download-large-file-in-python-with-requests-py
 def _download_file(url):
@@ -26,6 +27,6 @@ class aws():
 	def save_to_s3(self, url):
 		file_name = _download_file(url)
 		self.s3_client.upload_file(LOCAL_CACHE+file_name, BUCKET_NAME, file_name, ExtraArgs={'ContentType':'image/jpg'})
-		#self.s3_resource.Object(BUCKET_NAME, file_name).put(ACL='public-read')
-		return 'https://s3.amazonaws.com/'+BUCKET_NAME+'/'+file_name
+		self.s3_resource.Bucket(BUCKET_NAME).Object(file_name).Acl().put(ACL='public-read')
+		return AWS_BASE_URL+'/'+BUCKET_NAME+'/'+file_name
 
