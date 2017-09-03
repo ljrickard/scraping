@@ -26,6 +26,12 @@ logger.info('Total products scraped: %s', len(products))
 
 # TODO: 
 
+##### general #######
+#check if website still valid
+#check for new products
+#scrape and store new products
+
+##### kiehls specific #####
 #collect price and currency data
 #need to get primary image
 #improve get_tags to handle regex for - and /
