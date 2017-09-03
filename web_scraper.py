@@ -5,6 +5,7 @@ from validator import Validator
 from website_factory import Website
 
 PRODUCT_TEMPLATE_FILE = 'product.json'
+WEBSITES = ['kiehls', 'clarins']
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s: (%(processName)s: %(process)d) %(levelname)-2s - %(module)-2s(%(lineno)d): %(message)s') 
 logger = logging.getLogger(__name__)
@@ -14,15 +15,15 @@ product_template = json.loads(open(PRODUCT_TEMPLATE_FILE).read())
 dataAccess = DataAccess()
 validator = Validator(product_template)
 
-site = Website.factory(product_template, 'kiehls')
-
-products = site.execute()
-
-validation_result = validator.validate_products(products)
-
-dataAccess.save_products(products)
-
-logger.info('Total products scraped: %s', len(products))
+for website in WEBSITES:
+	site = Website.factory(product_template, website)
+	if site:
+		products = site.execute()
+		validation_result = validator.validate_products(products)
+		dataAccess.save_products(products)
+		logger.info('Total products scraped: %s', len(products))
+	else:
+		logger.warn('Website not found %s', website)
 
 # TODO: 
 

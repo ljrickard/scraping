@@ -7,4 +7,4 @@ class Website(object):
 	        return Clarins(product_template)
 	    if type == "kiehls": 
 	        return Kiehls(product_template)
-	    assert 0, "Website not found: " + type 
+	    return None
