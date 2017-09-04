@@ -5,8 +5,9 @@ from validator import Validator
 from website_factory import Website
 
 PRODUCT_TEMPLATE_FILE = 'product.json'
-WEBSITES = ['kiehls', 'clarins']
+WEBSITES = ['kiehls']
 
+#http://bugs.python.org/file4410/logging.py
 logging.basicConfig(level=logging.INFO, format='%(asctime)s: (%(processName)s: %(process)d) %(levelname)-2s - %(module)-2s(%(lineno)d): %(message)s') 
 logger = logging.getLogger(__name__)
 
@@ -19,11 +20,12 @@ for website in WEBSITES:
 	site = Website.factory(product_template, website)
 	if site:
 		products = site.execute()
-		validation_result = validator.validate_products(products)
+		products = list(filter(lambda product: product is not None, products))
+		#validation_result = validator.validate_products(products)
 		dataAccess.save_products(products)
 		logger.info('Total products scraped: %s', len(products))
 	else:
-		logger.warn('Website not found %s', website)
+		logger.warn('Website not found: %s', website)
 
 # TODO: 
 
@@ -31,6 +33,7 @@ for website in WEBSITES:
 #check if website still valid
 #check for new products
 #scrape and store new products
+#limit data returned by ES - for example: dont return source urls
 
 ##### kiehls specific #####
 #collect price and currency data
