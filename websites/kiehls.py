@@ -1,6 +1,6 @@
-import logging, datetime, requests, sys, html5lib, copy
-from bs4 import BeautifulSoup as bs
-from http import HTTPStatus
+#!/usr/bin/env python3
+import logging, datetime, copy
+from utils import make_soup, format_url
 
 BRAND = "Kiehls"
 BASE_URL = "http://www.kiehls.co.uk"
@@ -14,48 +14,39 @@ class Kiehls():
 	def __init__(self, product_template):
 		self.product_template = product_template
 
-	def execute(self):
-		skin_care_hrefs = self._get_hrefs(BASE_URL+SITE_MAP, SITE_MAP_KEYWORD) 
+
+	def get_product_urls(self):
+		# get hrefs that contain base url , site and keyword - for example: https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare	
+		hrefs = self._get_hrefs(BASE_URL+SITE_MAP, SITE_MAP_KEYWORD)
+		return [product_url for product_url in self._get_product_urls(hrefs) if self._is_valid_product_url(product_url)]
+
+	def _is_valid_product_url(self, url):
+		return not make_soup(url).find_all('a', class_='shop-individually ')
+
+	def scrape_product_urls(self, product_urls):
 		products = []
-		for url in self._get_product_urls(skin_care_hrefs):
-			products.append(copy.deepcopy(self._scrape_product(url)))
+		for url in product_urls:
+			products.append(copy.deepcopy(product))
 		return products
 
+	################## scrape homepage #######################################
+
 	def _get_hrefs(self, url, keyword):
-		logger.info('Scraping hrefs from URL=%s', url)
-		return [a.get('href') for a in self._make_soup(url).find_all('a') if keyword in a.get('href')]
+		return {a.get('href') for a in make_soup(url).find_all('a') if keyword in a.get('href')}
 
 	def _get_product_urls(self, skin_care_hrefs):
 		product_urls = set()
 		for href in skin_care_hrefs:
-			logger.info('Scraping product hrefs from URL=%s', href)
-			for product_href in [a.get('href') for a in self._make_soup(href).find_all('a', class_='product_name')]:
-				if BASE_URL in product_href:
-					product_urls.add(product_href)
-				else:
-					product_urls.add(BASE_URL+product_href)
+			for product_href in [a.get('href') for a in make_soup(href).find_all('a', class_='product_name')]:
+				product_urls.add(format_url(product_href, BASE_URL))
 
 		return product_urls
 
-	def _make_soup(self, url):
-		return bs(requests.get(url).text,  "html5lib")
+	################## scrape product #######################################
 
 	def _scrape_product(self, url):
-
-		################## scrape product #######################################
-
-		logger.info('Scraping %s', url)
-
 		product = self.product_template
-		soup = self._make_soup(url)
-
-		######## is valid product #######
-		def is_not_valid_product():
-			return soup.find_all('a', class_='shop-individually ')
-
-		if is_not_valid_product():
-			logger.warn('Not a valid product URL=%s', url)
-			return None
+		soup = make_soup(url)
 
 		######## brand ############
 		product['brand'] = BRAND
@@ -156,4 +147,21 @@ class Kiehls():
 		product['created_on'] = str(datetime.datetime.utcnow())
 
 		return product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,0 +1,10 @@
+{
+  "_source": ["source_url"],
+  "query": { 
+    "bool": { 
+      "filter": [ 
+        { "term":  { "brand": "" }}
+      ]
+    }
+  }
+}
