@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import logging, json
-from data_access.data_access import DataAccess
-from validator import Validator
+from components.data_access.data_access import DataAccess
+from components.data_access.validators.validator import Validator
 from sites.site_factory import Site
 from logging.config import fileConfig
 
-PRODUCT_TEMPLATE_FILE = 'product.json'
 BRANDS = ['kiehls']
 
 #http://bugs.python.org/file4410/logging.py
@@ -14,19 +13,16 @@ logger = logging.getLogger(__name__)
 
 
 def run(dry_run=False):
-	product_template = json.loads(open(PRODUCT_TEMPLATE_FILE).read())
-
 	dataAccess = DataAccess(dry_run)
-	validator = Validator(product_template)
+	validator = Validator(dataAccess.get_product_template())
 
 	for brand in BRANDS:
-		site = Site.factory(product_template, brand)
+		site = Site.factory(dataAccess.get_product_template(), brand)
 		if site:
 			product_urls = site.get_product_urls()
 			logger.info('Total products found is %s', len(product_urls))
 			product_urls = dataAccess.filter_existing_products(brand, product_urls)
 			logger.info('Total new products found is %s', len(product_urls))
-			#validation_result = validator.validate_products(products)
 			products = site.scrape_product_urls(product_urls)
 			dataAccess.save_products(products)
 			#logger.info('Total products scraped: %s', len(products))
@@ -47,6 +43,7 @@ if __name__ == "__main__":
 #put screen scrape into try/catch - only save if no error reported
 #need to remove 1000 hardcoding from es - number of results returned - break number into buckets
 #move to use env variables
+#add validation to data access layer
 
 ##### ES specific #####
 #limit data returned by ES - for example: dont return source urls

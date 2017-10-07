@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import logging, datetime, copy
-from utils import make_soup, format_url
+from sites.lib.utils import make_soup, format_url
 
 BRAND = "Kiehls"
 BASE_URL = "http://www.kiehls.co.uk"

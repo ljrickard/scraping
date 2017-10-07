@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import json, logging
-from data_access.aws_s3 import AwsS3
-from data_access.aws_es import AwsEs
+from components.data_access.aws_s3 import AwsS3
+from components.data_access.aws_es import AwsEs
 
 logger = logging.getLogger(__name__)
 DRY_RUN_LOCAL_FILE = 'testfile.json'
+PRODUCT_TEMPLATE_FILE = 'components/data_access/json_files/product.json'
 
 class DataAccess():
 
@@ -16,11 +17,17 @@ class DataAccess():
 		else:
 			logger.warn("Writing to file only as dry_run=%s", self.dry_run)
 
+	def get_product_template(self):
+		return json.loads(open(PRODUCT_TEMPLATE_FILE).read())
+
 	def save_products(self, products):
+		# add validation for products here
 		for product in products:
 			self._save_product(product)
 
 	def filter_existing_products(self, brand, product_urls):
+		if self.dry_run:
+			return product_urls
 		existing_product_urls = self.aws_es.get_existing_product_urls(brand)
 		return [product_url for product_url in product_urls if product_url not in existing_product_urls]
 
