@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import logging, json
-from data_access import DataAccess
+from data_access.data_access import DataAccess
 from validator import Validator
-from website_factory import Website
+from sites.site_factory import Site
 from logging.config import fileConfig
 
 PRODUCT_TEMPLATE_FILE = 'product.json'
@@ -20,7 +20,7 @@ def run(dry_run=False):
 	validator = Validator(product_template)
 
 	for brand in BRANDS:
-		site = Website.factory(product_template, brand)
+		site = Site.factory(product_template, brand)
 		if site:
 			product_urls = site.get_product_urls()
 			logger.info('Total products found is %s', len(product_urls))
@@ -31,7 +31,7 @@ def run(dry_run=False):
 			dataAccess.save_products(products)
 			#logger.info('Total products scraped: %s', len(products))
 		else:
-			logger.error('Website not found: %s', website)
+			logger.error('Site not found: %s', site)
 
 
 if __name__ == "__main__":
@@ -41,11 +41,12 @@ if __name__ == "__main__":
 # TODO: 
 
 ##### general #######
-#check if website still valid
+#check if website still valid - general check prior to scraping site
 #check for new products
 #scrape and store new products
 #put screen scrape into try/catch - only save if no error reported
-#need to remove 100 hardcoding from es - number of results returned
+#need to remove 1000 hardcoding from es - number of results returned - break number into buckets
+#move to use env variables
 
 ##### ES specific #####
 #limit data returned by ES - for example: dont return source urls

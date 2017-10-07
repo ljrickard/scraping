@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 FILTER_BRAND_BODY_FILE = 'es_filter_brand.json'
 ELASTIC_SEARCH_ENDPOINT = 'https://search-myesdomain-6nzvchl3slhk2di6fpbdb3i3zq.us-east-1.es.amazonaws.com'
 
-class ElasticSearch():
+class AwsEs():
 
 	def __init__(self):
 		self.es_url = ELASTIC_SEARCH_ENDPOINT

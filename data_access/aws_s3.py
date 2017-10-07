@@ -18,7 +18,7 @@ def _download_file(url):
 	            f.write(chunk)
 	return file_name
 
-class Aws():
+class AwsS3():
 
 	def __init__(self):
 		self.s3_client = boto3.client('s3')

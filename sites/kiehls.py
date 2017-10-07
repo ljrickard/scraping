@@ -14,14 +14,10 @@ class Kiehls():
 	def __init__(self, product_template):
 		self.product_template = product_template
 
-
 	def get_product_urls(self):
 		# get hrefs that contain base url , site and keyword - for example: https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare	
 		hrefs = self._get_hrefs(BASE_URL+SITE_MAP, SITE_MAP_KEYWORD)
 		return [product_url for product_url in self._get_product_urls(hrefs) if self._is_valid_product_url(product_url)]
-
-	def _is_valid_product_url(self, url):
-		return not make_soup(url).find_all('a', class_='shop-individually ')
 
 	def scrape_product_urls(self, product_urls):
 		products = []
@@ -41,6 +37,9 @@ class Kiehls():
 				product_urls.add(format_url(product_href, BASE_URL))
 
 		return product_urls
+
+	def _is_valid_product_url(self, url):
+		return not make_soup(url).find_all('a', class_='shop-individually ')
 
 	################## scrape product #######################################
 

@@ -1,7 +1,7 @@
-from websites.clarins import Clarins
-from websites.kiehls import Kiehls
+from sites.clarins import Clarins
+from sites.kiehls import Kiehls
 
-class Website(object):
+class Site(object):
     def factory(product_template, type):
 	    if type == "clarins": 
 	        return Clarins(product_template)
