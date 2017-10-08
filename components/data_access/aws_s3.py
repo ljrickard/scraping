@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import requests, logging, boto3, uuid
+import requests, logging, boto3, uuid, os
 
 LOCAL_CACHE = 'cache/'
-BUCKET_NAME = '5b05dbe9-c0b8-493e-8b05-7b5422887779'
+BUCKET_NAME = '287554b7-2564-4d05-aab5-952b606fe3a1'
 AWS_BASE_URL = 'https://s3.amazonaws.com'
 
 logger = logging.getLogger(__name__)
@@ -29,5 +29,11 @@ class AwsS3():
 		logger.info('Saving image URL=%s with filename=%s to s3 to bucket %s', url, file_name, BUCKET_NAME)
 		self.s3_client.upload_file(LOCAL_CACHE+file_name, BUCKET_NAME, file_name, ExtraArgs={'ContentType':'image/jpg'})
 		self.s3_resource.Bucket(BUCKET_NAME).Object(file_name).Acl().put(ACL='public-read')
+		os.remove(LOCAL_CACHE+file_name)
 		return AWS_BASE_URL+'/'+BUCKET_NAME+'/'+file_name
 
+	def clear_all_images(self):
+		logger.info('Removing all items from %s bucket', BUCKET_NAME)
+		full_bucket = self.s3_resource.Bucket(BUCKET_NAME)
+		for key in full_bucket.objects.all():
+		 	key.delete()

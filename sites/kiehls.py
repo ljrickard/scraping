@@ -22,7 +22,7 @@ class Kiehls():
 	def scrape_product_urls(self, product_urls):
 		products = []
 		for url in product_urls:
-			products.append(copy.deepcopy(product))
+			products.append(copy.deepcopy(self._scrape_product(url)))
 		return products
 
 	################## scrape homepage #######################################
