@@ -1,0 +1,57 @@
+2017-10-08 14:29:27,089: (MainProcess: 9644) INFO - credentials(674): Found credentials in shared credentials file: ~/.aws/credentials
+2017-10-08 14:29:27,136: (MainProcess: 9644) INFO - aws_email(16): Sending email to luke.rickard@gmail.com
+2017-10-08 14:29:27,140: (MainProcess: 9644) INFO - connectionpool(735): Starting new HTTPS connection (1): email.us-east-1.amazonaws.com
+2017-10-08 14:29:28,926: (MainProcess: 9644) INFO - aws_email(40): Email sent! Message ID:b5c64e0e-ac2c-11e7-ac33-3705339626ea
+2017-10-08 20:30:50,916: (MainProcess: 11342) INFO - credentials(674): Found credentials in shared credentials file: ~/.aws/credentials
+2017-10-08 20:34:49,162: (MainProcess: 11425) INFO - credentials(674): Found credentials in shared credentials file: ~/.aws/credentials
+2017-10-08 20:35:07,306: (MainProcess: 11442) INFO - credentials(674): Found credentials in shared credentials file: ~/.aws/credentials
+2017-10-08 20:47:14,044: (MainProcess: 11687) INFO - credentials(674): Found credentials in shared credentials file: ~/.aws/credentials
+2017-10-08 20:47:15,351: (MainProcess: 11687) INFO - utils(11): Making soup from URL=http://www.kiehls.co.uk/site-map.html
+2017-10-08 20:47:16,500: (MainProcess: 11687) INFO - utils(11): Making soup from URL=https://www.kiehls.co.uk/skin-care/category/serums
+2017-10-08 20:47:17,275: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/midnight-recovery-concentrate/819.html
+2017-10-08 20:47:17,275: (MainProcess: 11687) INFO - utils(15): Formatting URL=/gifts/category/someone-special/daily-reviving-concentrate/KHL497.html
+2017-10-08 20:47:17,275: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/collection/clearly-corrective-collection/clearly-correctivetm-dark-spot-solution/842.html
+2017-10-08 20:47:17,275: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/powerful-strength-line-reducing-concentrate/595.html
+2017-10-08 20:47:17,275: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/revive-replenish-duo/UK-00052KIE.html
+2017-10-08 20:47:17,275: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/repair-renew/UK-00051KIE.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/targeted-solutions/dermatologist-solutionstm-nightly-refining-micro-peel-concentrate/KHL110.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/hydro-plumping-re-texturizing-serum-concentrate/255.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/over-night-biological-peel/630.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/concern/lines-wrinkles/powerful-strength-line-reducing-eye-brightening-concentrate/KHL498.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/skin-care-gifts/fresh-hydrated/UK-00065KIE.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/skin-care-gifts/cleanse-correct/UK-00064KIE.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/age-defender-power-serum/KHL414.html
+2017-10-08 20:47:17,276: (MainProcess: 11687) INFO - utils(11): Making soup from URL=https://www.kiehls.co.uk/skin-care/category/facial-masks
+2017-10-08 20:47:18,080: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/rare-earth-deep-pore-cleansing-masque/792.html
+2017-10-08 20:47:18,081: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/calendula-aloe-soothing-hydration-masque/KHL4592.html
+2017-10-08 20:47:18,081: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/turmeric-cranberry-seed-energizing-radiance-masque/KHL3265.html
+2017-10-08 20:47:18,081: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/cilantro-orange-extract-pollutant-defending-masque/KHL4528.html
+2017-10-08 20:47:18,081: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/ultra-facial-overnight-hydrating-masque/3601.html
+2017-10-08 20:47:18,081: (MainProcess: 11687) INFO - utils(11): Making soup from URL=https://www.kiehls.co.uk/skin-care/category/toners-essence-lotions
+2017-10-08 20:47:19,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/men-s/men-s-oil-eliminator-refreshing-shine-control-spray-toner/UK-00080KIE.html
+2017-10-08 20:47:19,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/toners-essence-lotions/calendula-herbal-extract-alcohol-free-toner/254.html
+2017-10-08 20:47:19,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/view-all-skincare/clearly-correctivetm-clarity-activating-toner/845.html
+2017-10-08 20:47:19,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/toners-essence-lotions/cucumber-herbal-alcohol-free-toner/263.html
+2017-10-08 20:47:19,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/toners-essence-lotions/ultra-facial-toner/713.html
+2017-10-08 20:47:19,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/collection/ultra-facial-oil-free/tone/ultra-facial-oil-free-toner/10001.html
+2017-10-08 20:47:19,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/collection/rare-earth/rare-earth-pore-refining-tonic/793.html
+2017-10-08 20:47:19,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/new/new/travel-toiletries/cactus-flower-mist/KHL118.html
+2017-10-08 20:47:19,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/gifts/category/someone-special/iris-extract-activating-essence-treatment/884.html
+2017-10-08 20:47:19,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/toners-essence-lotions/blue-astringent-herbal-lotion/250.html
+2017-10-08 20:47:19,011: (MainProcess: 11687) INFO - utils(11): Making soup from URL=https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare
+2017-10-08 20:47:20,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/moisturisers/ultra-facial-cream/622.html
+2017-10-08 20:47:20,010: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/midnight-recovery-concentrate/819.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/eyes-lips/creamy-eye-treatment-with-avocado/258.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/rare-earth-deep-pore-cleansing-masque/792.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/toners-essence-lotions/calendula-herbal-extract-alcohol-free-toner/254.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/hydro-plumping-re-texturizing-serum-concentrate/255.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/collection/clearly-corrective-collection/clearly-correctivetm-dark-spot-solution/842.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/serums/powerful-strength-line-reducing-concentrate/595.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/cleansers-scrubs/calendula-deep-cleansing-foaming-face-wash/512.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/moisturisers/ultra-facial-oil-free-gel-cream/10003.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/moisturisers/super-multi-corrective-cream/495.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/turmeric-cranberry-seed-energizing-radiance-masque/KHL3265.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/facial-masks/cilantro-orange-extract-pollutant-defending-masque/KHL4528.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/eyes-lips/super-multi-corrective-eye-opening-serum/271.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(15): Formatting URL=/skin-care/category/sun-care/ultra-light-daily-defense-spf-50/1811.html
+2017-10-08 20:47:20,011: (MainProcess: 11687) INFO - utils(11): Making soup from URL=https://www.kiehls.co.uk/skin-care/category/targeted-solutions

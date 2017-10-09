@@ -4,6 +4,7 @@ from components.comms.aws_email import AwsEmail
 import dominate
 from dominate.tags import *
 
+HTML_DOC_TYPE = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional //EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
 template = 'components/comms/templates/scraping_report.json'
 logger = logging.getLogger(__name__)
 
@@ -29,21 +30,28 @@ class Comms():
 
 	def _generate_html(self, details):
 		doc = dominate.document(title='Report')
-		doc.doctype = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional //EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
+		doc.doctype = HTML_DOC_TYPE
 
 		with doc.head:
 		    link(rel='stylesheet', href='style.css')
 		    script(type='text/javascript', src='script.js')
 
 		with doc:
-			with div(id='header').add(ul()):
-			    for key, value in details.items():
-			        h4(value['brand'])
-			        p('total_products_found: %s' % value['total_products_found'])
-			        p('total_new_products_found: %s' % value['total_new_products_found'])
+			with div(id='summary'):
+				h3('Report Summary')
+				line1 = 'Total runtime: %s' % details['report_summary']['total_run_time']
+				line2 = 'Total number of sites scraped: %s' % details['report_summary']['number_of_sites_scraped']
+				h5('%s \n%s' % (line1, line2))
+			with div(id='details'):
+			    for key, value in details['sites'].items():
+			        h4(value['url'])
+			        line1 = 'total_products_found: %s' % value['total_products_found']
+			        line2 = 'total_new_products_found: %s' % value['total_new_products_found']
+			        p('%s \n%s' % (line1, line2))
 			        for url in value['product_urls']:
-			        	li(
-			        		a('new', href=url[0]),
-			        		a('source', href=url[1])
-			        		)
+			        	a(url, href=url) 
+			        	br()
 		return str(doc)
+
+
+

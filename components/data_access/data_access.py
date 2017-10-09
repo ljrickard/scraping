@@ -25,7 +25,7 @@ class DataAccess():
 		response=[]
 		for product in products:
 			product_urls = self._save_product(product)
-			response.append(response)
+			response.append(product_urls)
 		return response
 
 	def filter_existing_products(self, brand, product_urls):
@@ -35,7 +35,7 @@ class DataAccess():
 		return self._filter_out_existing_products_urls(product_urls, existing_product_urls)
 
 	def _filter_out_existing_products_urls(self, product_urls, existing_product_urls):
-		return [product_url for product_url in product_urls if product_url not in existing_product_urls]
+		return list(set(product_urls).difference(existing_product_urls))
 
 	def _save_product(self, product):
 		if self.dry_run:

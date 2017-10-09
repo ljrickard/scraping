@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-import logging, json, time
+import logging, json, time, pprint
 from components.data_access.data_access import DataAccess
 from components.data_access.validators.validator import Validator
 from components.comms.comms import Comms
 from sites.site_factory import Site
-from logging.config import fileConfig
 
 BRANDS = ['kiehls']
 
@@ -19,32 +18,44 @@ def run(dry_run=False):
 	validator = Validator(dataAccess.get_product_template())
 	comms = Comms()
 	details = {}
+	details['sites'] = {}
 
 	for index, brand in enumerate(BRANDS):
 		site = Site.factory(dataAccess.get_product_template(), brand)
-		details[index] = {}
-		details[index]['brand'] = brand
+		details['sites'][index] = {}
+		details['sites'][index]['url'] = site.get_base_url()
 		if site:
-			product_urls = site.get_product_urls()
+			product_urls = ['http://www.kiehls.co.uk/skin-care/category/moisturisers/pure-vitality-skin-renewing-cream/KHL907.html']#site.get_product_urls()
 			logger.info('Total products found is %s', len(product_urls))
-			details[index]['total_products_found'] = len(product_urls)
+			details['sites'][index]['total_products_found'] = len(product_urls)
 			new_product_urls = dataAccess.filter_existing_products(brand, product_urls)
-			details[index]['total_new_products_found'] = len(new_product_urls)
-			logger.info('Total new products found is %s', len(product_urls))
-			products = site.scrape_product_urls(product_urls)
-			details[index]['product_urls'] = dataAccess.save_products(products)
+			details['sites'][index]['total_new_products_found'] = len(new_product_urls)
+			logger.info('Total new products found is %s', len(new_product_urls))
+			if len(new_product_urls) < 1:
+				details['sites'][index]['product_urls'] = []
+				logger.info('Total products scraped: %s', len(new_product_urls))
+				break
+			products = site.scrape_product_urls(new_product_urls)
+			details['sites'][index]['product_urls'] = dataAccess.save_products(products)
 			logger.info('Total products scraped: %s', len(products))
 		else:
 			logger.error('Site not found: %s', site)
 
+	total_run_time = _calculate_run_time(start_time)
+	details['report_summary'] = {}
+	details['report_summary']['total_run_time'] = total_run_time
+	details['report_summary']['number_of_sites_scraped'] = len(BRANDS)
+	
 	logger.info('Sending report')
 	comms.send(1, details)
-	seconds = time.time() - start_time
-	m, s = divmod(seconds, 60)
-	h, m = divmod(m, 60)
-	total_run_time = "%d:%02d:%02d" % (h, m, s)
 
 	logger.info("Total run time is: %s", total_run_time)
+
+def _calculate_run_time(start_time):
+	seconds = time.time()-start_time
+	m, s = divmod(seconds, 60)
+	h, m = divmod(m, 60)
+	return "%d:%02d:%02d" % (h, m, s)
 
 
 if __name__ == "__main__":

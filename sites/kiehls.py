@@ -14,6 +14,9 @@ class Kiehls():
 	def __init__(self, product_template):
 		self.product_template = product_template
 
+	def get_base_url(self):
+		return BASE_URL
+
 	def get_product_urls(self):
 		# get hrefs that contain base url , site and keyword - for example: https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare	
 		hrefs = self._get_hrefs(BASE_URL+SITE_MAP, SITE_MAP_KEYWORD)

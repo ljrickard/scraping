@@ -29,8 +29,11 @@ class AwsS3():
 		logger.info('Saving image URL=%s with filename=%s to s3 to bucket %s', url, file_name, BUCKET_NAME)
 		self.s3_client.upload_file(LOCAL_CACHE+file_name, BUCKET_NAME, file_name, ExtraArgs={'ContentType':'image/jpg'})
 		self.s3_resource.Bucket(BUCKET_NAME).Object(file_name).Acl().put(ACL='public-read')
-		os.remove(LOCAL_CACHE+file_name)
+		self._remove_local_copy(LOCAL_CACHE+file_name)
 		return AWS_BASE_URL+'/'+BUCKET_NAME+'/'+file_name
+
+	def _remove_local_copy(self, file):
+		os.remove(file)
 
 	def clear_all_images(self):
 		logger.info('Removing all items from %s bucket', BUCKET_NAME)

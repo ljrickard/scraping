@@ -13,11 +13,11 @@ class AwsEs():
 
 	def push_product_to_es(self, payload):
 		response = self._post_payload_to_es(payload)
-		if response.status_code == 200:
-			return self._create_product_urls(payload)
+		if response.status_code == HTTPStatus.CREATED:
+			return self._create_product_urls(response)
 
-	def _create_product_urls(self, payload):
-		return [payload['source_url'], ['example.com/product']]
+	def _create_product_urls(self, response):
+		return ['%s/products/product/%s' % (ELASTIC_SEARCH_ENDPOINT, json.loads(response.text)['_id'])]
 
 	def _post_payload_to_es(self, payload):
 		response = requests.post((self.es_url+'/products/product'), data=json.dumps(payload))
@@ -41,4 +41,3 @@ class AwsEs():
 		response = requests.post((self.es_url+'/products/_search?size=1000'), data=json.dumps(payload))
 		logger.info('Response recieved %s', response.status_code)
 		return [existing_product_url['_source']['source_url'] for existing_product_url in json.loads(response.text)['hits']['hits']]
-
