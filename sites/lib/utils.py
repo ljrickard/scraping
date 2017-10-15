@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import requests, html5lib, logging
+import requests, html5lib, logging, time
 from bs4 import BeautifulSoup as bs
 
 HTTPS = 'https'
@@ -25,3 +25,9 @@ def _secure_url(url):
 
 def _remove_security_from_url(url):
 	return url.replace(HTTPS, HTTP)
+
+def calculate_run_time(start_time):
+	seconds = time.time()-start_time
+	m, s = divmod(seconds, 60)
+	h, m = divmod(m, 60)
+	return "%d:%02d:%02d" % (h, m, s)

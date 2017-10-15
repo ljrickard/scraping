@@ -1,7 +1,7 @@
 import unittest
 
 
-class MyTest(unittest.TestCase):
+class SiteTests(unittest.TestCase):
     def test_pass(self):
         self.assertTrue(True)
 
@@ -10,3 +10,11 @@ class MyTest(unittest.TestCase):
 
 if __name__ == '__main__':
 	unittest.main()	
+
+# happy path
+# site not found
+# no urls found
+# no new products found
+# run time calculated
+# test for dry run
+# error thrown

@@ -4,17 +4,17 @@ from sites.lib.utils import make_soup, format_url
 from components.data_access.data_access import DataAccess
 from sites.site import Site
 
-BRAND = "kiehls"
-BASE_URL = "http://www.kiehls.co.uk"
+BRAND = "ekul"
+BASE_URL = "http://www.ekul.com"
 SITE_MAP = "/site-map.html"
 SITE_MAP_KEYWORD = 'skin-care' # create regex containing skin care + base url
 
 logger = logging.getLogger(__name__)
 
-class Kiehls(Site):
+class Ekul(Site):
 
 	def __init__(self, dry_run):
-		super(Kiehls, self).__init__(dry_run)
+		super(Ekul, self).__init__(dry_run)
 		self.base_url = BASE_URL
 		self.brand = BRAND
 
