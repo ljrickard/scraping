@@ -1,0 +1,9 @@
+awscli==1.11.141
+beautifulsoup4==4.6.0
+boto3==1.4.6
+botocore==1.6.8
+docutils==0.14
+dominate==2.3.1
+html5lib==0.999999999
+requests==2.13.0
+Werkzeug==0.12.1
