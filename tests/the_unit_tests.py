@@ -1,12 +1,12 @@
-#!/usr/bin/env python3
 import unittest
 
 
 class MyTest(unittest.TestCase):
-    def test_something(self):
+    def test_pass(self):
         self.assertTrue(True)
+
+    def test_fail(self):
+        self.assertTrue(False)
 
 if __name__ == '__main__':
 	unittest.main()	
-
-
