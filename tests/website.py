@@ -1,6 +1,7 @@
 import unittest
 from sites.website import Website
 
+
 class WebsiteTests(unittest.TestCase):
     def test_execute_returns_report_of_type_dict(self):
         self.assertTrue(True)
@@ -8,8 +9,9 @@ class WebsiteTests(unittest.TestCase):
     def test_fail(self):
         self.assertTrue(False)
 
+
 if __name__ == '__main__':
-	unittest.main()	
+    unittest.main()
 
 # happy path
 # site not found
