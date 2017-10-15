@@ -1,4 +1,3 @@
-from sites.clarins import Clarins
 from sites.kiehls import Kiehls
 
 class Brands(object):
@@ -7,8 +6,5 @@ class Brands(object):
 		self.dry_run = dry_run
 
 	def factory(self, brand):
-
-		if brand == "clarins": return Clarins(self.dry_run)
 		if brand == "kiehls": return Kiehls(self.dry_run)
-
 		raise ValueError('{} not found'.format(brand))

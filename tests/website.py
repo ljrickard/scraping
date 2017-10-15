@@ -1,8 +1,8 @@
 import unittest
+from sites.website import Website
 
-
-class SiteTests(unittest.TestCase):
-    def test_pass(self):
+class WebsiteTests(unittest.TestCase):
+    def test_execute_returns_report_of_type_dict(self):
         self.assertTrue(True)
 
     def test_fail(self):

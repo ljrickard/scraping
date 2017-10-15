@@ -13,6 +13,10 @@ class Comms():
 	def __init__(self):
 		self.emailer = AwsEmail()
 
+	def send_scrape_report(self, report):
+		print(report)
+		pass
+
 	def send(self, template_id, details):
 		self.data=self._generate_email(template_id, details)
 		self.emailer.send_email(self.data)
