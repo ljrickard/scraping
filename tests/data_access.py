@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import unittest
+from components.data_access.data_access import DataAccess
 
 
 class DataAccessTests(unittest.TestCase):
