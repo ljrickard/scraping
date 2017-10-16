@@ -1,10 +1,12 @@
 {
-  "_source": ["source_url"],
-  "query": { 
-    "bool": { 
-      "filter": [ 
-        { "term":  { "brand": "" }}
-      ]
+    "_source": ["source_url"],
+    "query": {
+        "bool": {
+            "filter": [{
+                "term": {
+                    "brand": ""
+                }
+            }]
+        }
     }
-  }
 }

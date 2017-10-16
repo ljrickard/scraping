@@ -1,42 +1,63 @@
 {
-  "mappings" : {
-    "product" : {
-      "_source" : {
-        "enabled" : true
-      },
-      "properties" : {
-        "name" : { "type" : "text" },
-        "brand" : { "type" : "text",
-          "fields": {
-            "keyword": { 
-              "type": "keyword"}
-          } },
-        "tagline" : { "type" : "text" },
-        "size" : { "type" : "text" },
-        "source_images" : { "type" : "text" },
-        "s3_images" : { "type" : "text" },
-        "source_url" : { "type" : "text" },
-        "description" : {
-          "type" : "text",
-          "term_vector": "with_positions_offsets"
-        },
-        "created_on" : {
-          "type" : "date",
-          "format" : "yyyy-MM-dd"
-        },
-        "ingredients" : {
-          "type" : "text",
-          "index" : "analyzed",
-          "fields": {
-            "verbatim" : {
-              "type" : "keyword"
+    "mappings": {
+        "product": {
+            "_source": {
+                "enabled": true
+            },
+            "properties": {
+                "name": {
+                    "type": "text"
+                },
+                "brand": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword"
+                        }
+                    }
+                },
+                "tagline": {
+                    "type": "text"
+                },
+                "size": {
+                    "type": "text"
+                },
+                "source_images": {
+                    "type": "text"
+                },
+                "s3_images": {
+                    "type": "text"
+                },
+                "source_url": {
+                    "type": "text"
+                },
+                "description": {
+                    "type": "text",
+                    "term_vector": "with_positions_offsets"
+                },
+                "created_on": {
+                    "type": "date",
+                    "format": "yyyy-MM-dd"
+                },
+                "ingredients": {
+                    "type": "text",
+                    "index": "analyzed",
+                    "fields": {
+                        "verbatim": {
+                            "type": "keyword"
+                        }
+                    }
+                },
+                "gender": {
+                    "type": "text"
+                },
+                "tags": {
+                    "type": "text"
+                },
+                "metadata": {
+                    "type": "text"
+                }
             }
-          }
-        },
-        "gender" : { "type" : "text" },
-        "tags" : { "type" : "text" },
-        "metadata" : { "type" : "text" }
-      }
+        }
     }
-  }
 }

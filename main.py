@@ -15,16 +15,16 @@ logger = logging.getLogger(__name__)
 
 
 def run(dry_run=False):
-  report = []
-  for url in BRANDS:
-    site = Brands(dry_run).factory(url)
-    report.append(site.execute())
+    report = []
+    for url in BRANDS:
+        site = Brands(dry_run).factory(url)
+        report.append(site.execute())
 
-  Comms().send_scrape_report(report)
+    Comms().send_scrape_report(report)
 
 
 if __name__ == "__main__":
-  run(dry_run=True)
+    run(dry_run=False)
 
 
 # TODO:
@@ -54,20 +54,20 @@ if __name__ == "__main__":
 # update size/measurement to dict {'ml': ['30', '75']}
 
 # bugs:
-  #"http://www.kiehls.co.uk/skin-care/category/eyes-lips/scented-lip-balm--1/696.html"
-  #"size": [
-  #["Pear"],
-  #["Mango"],
-  #["Mint"],
-  #["Cranberry"],
-  #["15", "ml"]
+    #"http://www.kiehls.co.uk/skin-care/category/eyes-lips/scented-lip-balm--1/696.html"
+    #"size": [
+    #["Pear"],
+    #["Mango"],
+    #["Mint"],
+    #["Cranberry"],
+    #["15", "ml"]
 
-  #"http://www.kiehls.co.uk/men-s/category/moisturisers-for-men/age-defender-moisturizer/KHL413.html"
-  # ingredients:
-  #"The strengthening protein blend": "in the formula helps firm skin and improve its resiliency and elasticity."
+    #"http://www.kiehls.co.uk/men-s/category/moisturisers-for-men/age-defender-moisturizer/KHL413.html"
+    # ingredients:
+    #"The strengthening protein blend": "in the formula helps firm skin and improve its resiliency and elasticity."
 
-  #"http://www.kiehls.co.uk/skin-care/collection/activated-sun/activated-sun-protector-lotion-for-body-spf-50/1806.html"
-  #"Patented Sun Filter Technology": "Avobenzone (UVA Filter), Homosalate (UVB Filter), Octisalate (UVB Filter), Octocrylene (UVB Filter), Oxybenzone (UVA/UVB Filter)"
+    #"http://www.kiehls.co.uk/skin-care/collection/activated-sun/activated-sun-protector-lotion-for-body-spf-50/1806.html"
+    #"Patented Sun Filter Technology": "Avobenzone (UVA Filter), Homosalate (UVB Filter), Octisalate (UVB Filter), Octocrylene (UVB Filter), Oxybenzone (UVA/UVB Filter)"
 
 # exclude collections - DONE
 # save image to S3 bucket - DONE
