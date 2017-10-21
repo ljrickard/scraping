@@ -26,7 +26,8 @@ class Kiehls(Website):
         return super(Kiehls, self).execute()
 
     def get_product_urls(self):
-        # get hrefs that contain base url , site and keyword - for example: https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare
+        # get hrefs that contain base url , site and keyword - for example:
+        # https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare
         hrefs = self._get_hrefs(BASE_URL + SITE_MAP, SITE_MAP_KEYWORD)
         return [product_url for product_url in self._get_product_urls(hrefs) if self._is_valid_product_url(product_url)]
 
@@ -104,7 +105,8 @@ class Kiehls(Website):
         def has_class_but_no_id(tag):
             return tag.has_attr('data-trackinginfo')
 
-        # first part locates the tags and the second extracts that particular attribute data
+        # first part locates the tags and the second extracts that particular
+        # attribute data
         product['metadata'] = soup.find_all(
             has_class_but_no_id)[-1].extract().get('data-trackinginfo')
 

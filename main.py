@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 import logging
 import json
-import time
-import pprint
 from components.comms.comms import Comms
 from sites.brand_factory import Brands
+
 
 BRANDS = ['kiehls']
 
@@ -16,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 def run(dry_run=False):
     report = []
-    for url in BRANDS:
+    for x in BRANDS:
         site = Brands(dry_run).factory(url)
         report.append(site.execute())
 
@@ -26,8 +25,6 @@ def run(dry_run=False):
 if __name__ == "__main__":
     run(dry_run=False)
 
-
-# TODO:
 
 ##### general #######
 # check if website still valid - general check prior to scraping site
