@@ -2,8 +2,6 @@ machine:
   python:                                                                                                                                                                
     version: 3.6.0
 
-steps:
-  - run: mkdir test-reports
-    name: Unittests
-      python3 ./tests/data_access.py
-      python3 ./tests/website.py
+test:
+ override:
+  - nose2 
