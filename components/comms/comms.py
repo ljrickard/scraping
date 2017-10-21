@@ -47,15 +47,18 @@ class Comms():
         with doc:
             with div(id='summary'):
                 h3('Report Summary')
-                line1 = 'Total runtime: %s' % details['report_summary']['total_run_time']
+                line1 = 'Total runtime: %s' % details[
+                    'report_summary']['total_run_time']
                 line2 = 'Total number of sites scraped: %s' % details[
                     'report_summary']['number_of_sites_scraped']
                 h5('%s \n%s' % (line1, line2))
             with div(id='details'):
                 for key, value in details['sites'].items():
                     h4(value['url'])
-                    line1 = 'total_products_found: %s' % value['total_products_found']
-                    line2 = 'total_new_products_found: %s' % value['total_new_products_found']
+                    line1 = 'total_products_found: %s' % value[
+                        'total_products_found']
+                    line2 = 'total_new_products_found: %s' % value[
+                        'total_new_products_found']
                     p('%s \n%s' % (line1, line2))
                     for url in value['product_urls']:
                         a(url, href=url)

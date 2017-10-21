@@ -29,7 +29,8 @@ class Kiehls(Website):
         # get hrefs that contain base url , site and keyword - for example:
         # https://www.kiehls.co.uk/skin-care/category/best-sellers-skincare
         hrefs = self._get_hrefs(BASE_URL + SITE_MAP, SITE_MAP_KEYWORD)
-        return [product_url for product_url in self._get_product_urls(hrefs) if self._is_valid_product_url(product_url)]
+        return [product_url for product_url in self._get_product_urls(
+            hrefs) if self._is_valid_product_url(product_url)]
 
     def scrape_product_urls(self, product_urls):
         products = []
@@ -40,12 +41,14 @@ class Kiehls(Website):
     ################## scrape homepage #######################################
 
     def _get_hrefs(self, url, keyword):
-        return {a.get('href') for a in make_soup(url).find_all('a') if keyword in a.get('href')}
+        return {a.get('href') for a in make_soup(
+            url).find_all('a') if keyword in a.get('href')}
 
     def _get_product_urls(self, skin_care_hrefs):
         product_urls = set()
         for href in skin_care_hrefs:
-            for product_href in [a.get('href') for a in make_soup(href).find_all('a', class_='product_name')]:
+            for product_href in [a.get('href') for a in make_soup(
+                    href).find_all('a', class_='product_name')]:
                 product_urls.add(format_url(product_href, BASE_URL))
 
         return product_urls
@@ -131,7 +134,8 @@ class Kiehls(Website):
             return tag.has_attr('itemprop')
 
         def has_data_pricevalue_and_data_pricemoney(tag):
-            return tag.has_attr('data-pricevalue') and tag.has_attr('data-pricemoney')
+            return tag.has_attr(
+                'data-pricevalue') and tag.has_attr('data-pricemoney')
 
         product_size = product_details.find_all(
             has_data_pricevalue_and_data_pricemoney)
@@ -159,7 +163,8 @@ class Kiehls(Website):
 
         ##### tags #######
         def get_tags(url):
-            return [tag for tag in ['masque', 'moisturizer', 'facial', 'masks', 'herbal', 'hydrating', 'spf'] if tag in url.lower()]
+            return [tag for tag in ['masque', 'moisturizer', 'facial',
+                                    'masks', 'herbal', 'hydrating', 'spf'] if tag in url.lower()]
 
         product['tags'] = get_tags(url)
 

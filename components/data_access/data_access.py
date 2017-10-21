@@ -34,9 +34,11 @@ class DataAccess():
         if self.dry_run:
             return product_urls
         existing_product_urls = self.aws_es.get_existing_product_urls(brand)
-        return self._filter_out_existing_products_urls(product_urls, existing_product_urls)
+        return self._filter_out_existing_products_urls(
+            product_urls, existing_product_urls)
 
-    def _filter_out_existing_products_urls(self, product_urls, existing_product_urls):
+    def _filter_out_existing_products_urls(
+            self, product_urls, existing_product_urls):
         return list(set(product_urls).difference(existing_product_urls))
 
     def _save_product(self, product):
