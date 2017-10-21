@@ -2,7 +2,8 @@ machine:
   python:                                                                                                                                                                
     version: 3.6.0
 
-test:
-  override:
-    ./tests/data_access.py
-    ./tests/website.py
+steps:
+  - run: mkdir test-reports
+    name: Unittests
+      python3 ./tests/data_access.py
+      python3 ./tests/website.py
