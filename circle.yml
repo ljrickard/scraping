@@ -4,4 +4,4 @@ machine:
 
 test:
  override:
-  - nose2 
+  - nose2
