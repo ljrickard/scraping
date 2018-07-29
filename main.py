@@ -4,8 +4,8 @@ import json
 from components.comms.comms import Comms
 from sites.brand_factory import Brands
 
+BRANDS = ['kiehls']  # change to persist as uppercase
 
-BRANDS = ['kiehls']
 
 # http://bugs.python.org/file4410/logging.py
 logging.basicConfig(level=logging.INFO,
@@ -15,14 +15,16 @@ logger = logging.getLogger(__name__)
 
 def run(dry_run=False):
     report = []
-    for x in BRANDS:
+    for url in BRANDS:
         site = Brands(dry_run).factory(url)
-        report.append(site.execute())
+        site.execute()
+        # report.append(site.execute())
 
-    Comms().send_scrape_report(report)
+    # Comms().send_scrape_report(report)
 
 
 if __name__ == "__main__":
+    
     run(dry_run=False)
 
 
@@ -40,6 +42,10 @@ if __name__ == "__main__":
 
 
 ##### ES specific #####
+
+# look at using the python client for es service
+
+# update created on schema to datetime of UTC - not text
 # limit data returned by ES - for example: dont return source urls
 # remove one of product/products from url
 

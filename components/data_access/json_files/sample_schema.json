@@ -1,0 +1,27 @@
+{
+    "get-together-two":
+    {
+        "mappings":
+        {
+            "new-events":
+            {
+                "properties":
+                {
+                    "date":
+                    {
+                        "type": "date",
+                        "format": "dateOptionalTime"
+                    },
+                    "host":
+                    {
+                        "type": "string"
+                    },
+                    "name":
+                    {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

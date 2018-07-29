@@ -1,4 +1,6 @@
 {
+    "skin_type": "",
+    "id": "",
     "brand": "",
     "name": "",
     "tagline": "",
@@ -11,5 +13,6 @@
     "gender": [],
     "tags": [],
     "created_on": "",
-    "source_url": ""
+    "source_url": "",
+    "unique_id": ""
 }

@@ -1,0 +1,61 @@
+{ "name" : "Mr A",
+  "quotations" : [ "quotation one, this and that and these"
+                 , "quotation two, those and that"]
+}
+
+{ "name" : "Mr B",
+  "quotations" : [ "quotation three, this and that"
+                 , "quotation four, those and these"]
+}
+
+[
+	{"HEPES (Hydroxyethylpiperazine Ethane Sulfonic Acid)  ": "HEPES, or Hydroxyethylpiperazine Ethane Sulfonic A…ative helps to improve skin and limits roughness."}
+	{Sodium Hyaluronate: "Sodium Hyaluronate is the sodium salt of Hyaluroni…s own weight in water. See also: Hyaluronic Acid."}
+	{Urea: "An enzyme activator naturally present in the surfa…ng as a natural moisturizing agent in human skin."}
+]
+
+
+"mappings": {
+	"people": {
+	  "properties": {
+	    "name": {
+	      "type": "string"
+	    },
+	    "quotations": {
+	      "type": "nested",
+	      "properties": {
+	        "value": {
+	          "type": "string"
+	        }
+	      }
+	    }
+	  }
+	}
+}
+
+{"name":"Mr A","quotations":[{"value": "quotation one, this and that and these"}, {"value": "quotation two, those and that"}]}
+
+{"name":"Mr B",  "quotations":[{"value": "quotation three, this and that"}, {"value": "quotation four, those and these"}]  }
+
+
+"ingredients":
+{
+    "type": "nested"
+}
+
+
+"ingredients":
+{
+    "type": "nested",
+    "properties":
+    {
+        "key":
+        {
+            "type": "text"
+        },
+        "value":
+        {
+            "type": "text"
+        }
+    }
+},

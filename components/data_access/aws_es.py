@@ -6,7 +6,10 @@ from http import HTTPStatus
 
 logger = logging.getLogger(__name__)
 FILTER_BRAND_BODY_FILE = 'components/data_access/json_files/es_filter_brand.json'
-ELASTIC_SEARCH_ENDPOINT = 'https://search-myesdomain-rxwevag666yfxh6bjvt5au62iq.us-east-1.es.amazonaws.com'
+PRODUCT_SCHEMA_FILE = 'components/data_access/json_files/es_product_schema.json'
+ELASTIC_SEARCH_ENDPOINT = 'http://52.87.204.186:9200'
+INDEX = 'products'
+TYPE = 'skincare'
 
 
 class AwsEs():
@@ -20,14 +23,29 @@ class AwsEs():
             return self._create_product_urls(response)
 
     def _create_product_urls(self, response):
-        return ['%s/products/product/%s' % (ELASTIC_SEARCH_ENDPOINT, json.loads(response.text)['_id'])]
+        return ['%s/products/skincare/%s' % (ELASTIC_SEARCH_ENDPOINT, json.loads(response.text)['_id'])]
 
     def _post_payload_to_es(self, payload):
+        logger.info(self.es_url + '/products/skincare/' + payload['id'])
+        headers = {'content-type': 'application/json'}
         response = requests.post(
-            (self.es_url + '/products/product'), data=json.dumps(payload))
-        logger.info('Response from eastic search post request %s',
-                    response.text)
+            (self.es_url + '/products/skincare/' + payload['id']), data=json.dumps(payload), headers=headers)
+        logger.info('Response from eastic search post request %s', response.text)
         return response
+
+    def _create_products_mapping(self):
+
+        # curl -XPUT -H 'Content-Type: application/json' 'localhost:9200/products/'
+        # curl -XPUT -H 'Content-Type: application/json' 'localhost:9200/products/_mapping/skincare' -d '{"properties":{"name":{"type":"text"}}}'
+
+        payload = json.loads(open(PRODUCT_SCHEMA_FILE).read())
+        headers = {'Content-Type': 'application/json'}
+        response = requests.put((self.es_url + '/products/'))
+        logger.info('Response from eastic search create_products_mapping %s', response.text)
+
+
+        response = requests.put((self.es_url + '/products/_mapping/skincare'), data=json.dumps(payload), headers=headers)
+        logger.info('Response from eastic search create_products_mapping %s', response.text)
 
     def clear_all_es_data(self):
         response = requests.delete(self.es_url + '/products')

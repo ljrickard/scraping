@@ -31,6 +31,7 @@ class DataAccess():
         return response
 
     def filter_existing_products(self, brand, product_urls):
+        return product_urls #running locally
         if self.dry_run:
             return product_urls
         existing_product_urls = self.aws_es.get_existing_product_urls(brand)
@@ -52,7 +53,7 @@ class DataAccess():
         s3_images = []
         source_images = product['source_images']
         for source_image in source_images:
-            s3_images.append(self.aws_s3.save_image_to_s3(source_image))
+            s3_images.append(self.aws_s3.save_image_to_s3(source_image, product['id']))
         product['s3_images'] = s3_images
 
     def _write_product_to_file(self, product):
@@ -67,3 +68,6 @@ class DataAccess():
         logger.warn("Removing all data via data_access layer")
         self.aws_es.clear_all_es_data()
         self.aws_s3.clear_all_images()
+
+    def create_products_mapping(self):
+        self.aws_es._create_products_mapping()

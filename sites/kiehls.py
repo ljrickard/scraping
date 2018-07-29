@@ -3,11 +3,13 @@ import logging
 import datetime
 import copy
 import time
+import random
+import uuid
 from sites.lib.utils import make_soup, format_url
 from components.data_access.data_access import DataAccess
 from sites.website import Website
 
-BRAND = "kiehls"
+BRAND = "Kiehls"
 BASE_URL = "http://www.kiehls.co.uk"
 SITE_MAP = "/site-map.html"
 SITE_MAP_KEYWORD = 'skin-care'  # create regex containing skin care + base url
@@ -70,8 +72,15 @@ class Kiehls(Website):
             'div', class_='l-product_details-wrapper')[-1].extract()
         product_names = product_details.find_all('span', class_='product_name')
 
+        printable = ' -&0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' #remove #
+
+        #$-_.+!*'(),, 
+
         for name in product_names:
             product['name'] = name.get_text()
+            name = (''.join(filter(lambda x: x in printable, name.get_text()))).replace(' ', '-')
+            brand = (''.join(filter(lambda x: x in printable, BRAND))).replace(' ', '-')
+            product['id'] = brand + '-' + name
 
         ###### tagline ###########
         product_subtitle_raw = product_details.find_all(
@@ -121,13 +130,11 @@ class Kiehls(Website):
             return input[input[:right_index].rfind('>') + 1:right_index]
 
         def extract_ingredient(ingredient_raw):
-            ingredient = extract_text(str(ingredient_raw), 0)
-            ingredient_description = extract_text(
-                str(ingredient_raw), str(ingredient_raw).index('</') + 1)
-            return {ingredient.replace('u00a0', ''): ingredient_description}
+            ingredient = extract_text(str(ingredient_raw), 0).replace('u00a0', '').strip()
+            ingredient_description = extract_text(str(ingredient_raw), str(ingredient_raw).index('</') + 1)
+            return {'name': ingredient, 'description': ingredient_description}
 
-        product['ingredients'] = [extract_ingredient(
-            ingredient_raw) for ingredient_raw in ingredients_raw]
+        product['ingredients'] = [extract_ingredient(ingredient_raw) for ingredient_raw in ingredients_raw]
 
         ##### size #######
         def has_item_prop(tag):
@@ -169,6 +176,31 @@ class Kiehls(Website):
         product['tags'] = get_tags(url)
 
         ##### created_on #######
-        product['created_on'] = str(datetime.datetime.utcnow())
+        product['created_on'] = str(datetime.datetime.utcnow()) #add timezone information here
+
+        ##### skin_type #######
+        def generate_random_skin_type():
+            return random.choice(['normal', 'oily', 'dry', 'sensitive'])
+
+        product['skin_type'] = generate_random_skin_type()
+
+        ##### unique_id #######
+        product['unique_id'] = str(uuid.uuid4())
 
         return product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
